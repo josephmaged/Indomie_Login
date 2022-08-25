@@ -23,7 +23,7 @@ class ReusableTile extends StatelessWidget {
         child: Text(
           string!,
           style: const TextStyle(
-            fontSize: 20,
+            fontSize: 14,
             color: kDarkBlackColor,
             fontWeight: FontWeight.w500,
           ),

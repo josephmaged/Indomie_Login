@@ -1,3 +1,5 @@
+import 'package:dio/dio.dart';
+
 class Employee {
   String? employeeName;
   String? employeeNameArabic;
@@ -28,14 +30,14 @@ class Employee {
     'emp_born_date': employeeBornDate
   };
 
-  factory Employee.fromJson(Map<String, dynamic> json){
+  factory Employee.fromJson(Response json){
     return Employee(
-        employeeName: json[0]['emp_name'] as String,
-        employeeNameArabic: json[0]['emp_name_arabic'] as String,
-        employeeDepartment: json[0]['emp_dept'] as String,
-        employeeJobTitle: json[0]['emp_job_title'] as String,
-        employeeJobPosition: json[0]['emp_job_position'] as String,
-        employeeJoinDate: json[0]['emp_join_date'] as String,
-        employeeBornDate: json[0]['emp_born_date'] as String);
+        employeeName: json.data[0]['emp_name'] as String,
+        employeeNameArabic: json.data[0]['emp_name_arabic'] as String,
+        employeeDepartment: json.data[0]['emp_dept'] as String,
+        employeeJobTitle: json.data[0]['emp_job_title'] as String,
+        employeeJobPosition: json.data[0]['emp_job_position'] as String,
+        employeeJoinDate: json.data[0]['emp_join_date'] as String,
+        employeeBornDate: json.data[0]['emp_born_date'] as String);
   }
 }

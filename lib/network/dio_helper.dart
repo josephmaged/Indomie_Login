@@ -12,7 +12,7 @@ class DioHelper {
         headers: {'Content-Type': 'Application/json', 'Accept': '*/*'}));
   }
 
-  static Future getData({required String url, Map<String, dynamic>? query, bool isAuthentication = false}) async {
+  static Future getData({required String url, Map<String, dynamic>? query}) async {
 
     Response? res;
     try {
