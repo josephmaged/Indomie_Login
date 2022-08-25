@@ -4,19 +4,20 @@ import 'package:indomie_login/core/model/Employee.dart';
 
 class ReusableTile extends StatelessWidget {
   final String? string;
-  const ReusableTile({
-    Key? key,
-    required this.string
-  }) : super(key: key);
+
+  const ReusableTile({Key? key, required this.string}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
     return Container(
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: kWhiteColor,
+        border: Border.all(
+          color: kPrimaryColor,
+          width: 0.1,
+        ),
       ),
       child: Padding(
         padding: const EdgeInsets.all(20),

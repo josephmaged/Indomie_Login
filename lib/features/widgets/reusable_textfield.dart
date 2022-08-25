@@ -30,13 +30,13 @@ class ReusableTextField extends StatelessWidget {
           color: kDarkBlackColor
         ),
         filled: true,
-        fillColor: kLightColor,
+        fillColor: kWhiteColor,
         focusedBorder: OutlineInputBorder(
             borderSide: const BorderSide(color: kPrimaryColor),
             borderRadius: BorderRadius.circular(10)
         ),
         enabledBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: kLightColor),
+            borderSide: const BorderSide(color: kLightBlackColor),
             borderRadius: BorderRadius.circular(10)
         ),
       ),

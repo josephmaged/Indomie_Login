@@ -16,55 +16,60 @@ class LoginWidget extends StatelessWidget {
     return BlocBuilder<AppBloc, AppStates>(
       builder: (context, state) {
         return Scaffold(
-          body: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 100),
-                    child: Text(
-                      'Hi, \nWelcome back.',
-                      style: TextStyle(color: kPrimaryColor, fontSize: 50, fontWeight: FontWeight.bold),
+          body: Container(
+            color: kLightColor,
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 100),
+                      child: Text(
+                        'Hi, \nWelcome back.',
+                        style: TextStyle(color: kPrimaryColor, fontSize: 50, fontWeight: FontWeight.bold),
+                      ),
                     ),
-                  ),
-                  const ReusableText(text: 'User Name'),
-                  const SizedBox(height: 15),
-                  ReusableTextField(
-                    text: AppBloc.get(context).username,
-                    hintText: 'User Name',
-                    errorText: 'Please Enter User Name',
-                    obscure: false,
-                  ),
-                  const SizedBox(height: 25),
-                  const ReusableText(text: 'Password'),
-                  const SizedBox(height: 15),
-                  ReusableTextField(
-                    text: AppBloc.get(context).password,
-                    hintText: 'Password',
-                    errorText: 'Please Enter Password',
-                    obscure: AppBloc.get(context).obscure,
-                    icon: IconButton(
-                      icon: AppBloc.get(context).obscure == false
-                          ? const Icon(Icons.visibility)
-                          : const Icon(Icons.visibility_off),
-                      color: kPrimaryColor,
+                    const ReusableText(text: 'User Name'),
+                    const SizedBox(height: 15),
+                    ReusableTextField(
+                      text: AppBloc.get(context).username,
+                      hintText: 'User Name',
+                      errorText: 'Please Enter User Name',
+                      obscure: false,
+                    ),
+                    const SizedBox(height: 25),
+                    const ReusableText(text: 'Password'),
+                    const SizedBox(height: 15),
+                    ReusableTextField(
+                      text: AppBloc.get(context).password,
+                      hintText: 'Password',
+                      errorText: 'Please Enter Password',
+                      obscure: AppBloc.get(context).obscure,
+                      icon: IconButton(
+                        icon: AppBloc.get(context).obscure == false
+                            ? const Icon(Icons.visibility)
+                            : const Icon(Icons.visibility_off),
+                        color: kPrimaryColor,
+                        onPressed: () {
+                          AppBloc.get(context).changeObscure();
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 40),
+                    ReusableButton(
                       onPressed: () {
-                        AppBloc.get(context).changeObscure();
+                        AppBloc.get(context).login(context);
                       },
+                      text: 'Sign In',
+                      color: kPrimaryColor,
                     ),
-                  ),
-                  const SizedBox(height: 40),
-                  ReusableButton(
-                    onPressed: () {
-                      AppBloc.get(context).login(context);
-                    },
-                    text: 'Sign In',
-                    color: kPrimaryColor,
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

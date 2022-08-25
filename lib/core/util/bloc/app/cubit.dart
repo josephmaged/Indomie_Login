@@ -31,7 +31,7 @@ class AppBloc extends Cubit<AppStates> {
       if (value.toString().contains('DioErrorType.response'))
         {
           ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Username or Password is incorrect')))
+              const SnackBar(content: Text('Wrong Username or Password')))
         }
       else if (value != null)
         {
