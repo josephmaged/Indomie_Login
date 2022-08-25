@@ -1,10 +1,13 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:indomie_login/config/const.dart';
+import 'package:indomie_login/core/model/Employee.dart';
 import 'package:indomie_login/features/home/page/home_page.dart';
 import 'package:indomie_login/features/widgets/reusable_button.dart';
+import 'package:indomie_login/features/widgets/reusable_text.dart';
 import 'package:indomie_login/features/widgets/reusable_textfield.dart';
 import 'package:indomie_login/network/dio_helper.dart';
 
@@ -17,6 +20,12 @@ class LoginWidget extends StatefulWidget {
 
   @override
   State<LoginWidget> createState() => _LoginWidgetState();
+}
+
+List<Employee> parseEmployee(String responseBody) {
+  final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
+
+  return parsed.map<Employee>((json) => Employee.fromJson(json)).toList();
 }
 
 class _LoginWidgetState extends State<LoginWidget> {
@@ -37,14 +46,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                   style: TextStyle(color: kPrimaryColor, fontSize: 50, fontWeight: FontWeight.bold),
                 ),
               ),
-              const Text(
-                'User Name',
-                style: TextStyle(
-                  fontSize: 20,
-                  color: kLightBlackColor,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
+              const ReusableText(text: 'User Name'),
               const SizedBox(height: 15),
               ReusableTextField(
                 text: username,
@@ -53,14 +55,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                 obscure: false,
               ),
               const SizedBox(height: 25),
-              const Text(
-                'Password',
-                style: TextStyle(
-                  fontSize: 20,
-                  color: kLightBlackColor,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
+              const ReusableText(text: 'Password'),
               const SizedBox(height: 15),
               ReusableTextField(
                 text: password,
@@ -68,7 +63,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                 errorText: 'Please Enter Password',
                 obscure: obscure,
                 icon: IconButton(
-                  icon: obscure == false ? Icon(Icons.visibility) : Icon(Icons.visibility_off),
+                  icon: obscure == false ? const Icon(Icons.visibility) : const Icon(Icons.visibility_off),
                   color: kPrimaryColor,
                   onPressed: () {
                     setState(() {
@@ -93,7 +88,10 @@ class _LoginWidgetState extends State<LoginWidget> {
                         else if (value != null)
                           {
                             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Signing In'))),
-                            Navigator.of(context).pushReplacementNamed(HomePage.ID)
+                            DioHelper.getData(url: "/master/?emp_id=100").then((value) => {
+                                  parseEmployee(value.toString()),
+                                }),
+                            Navigator.of(context).pushNamed(HomePage.ID)
                           }
                       });
                 },
